@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar *ngIf="!isSearch">
+    <ion-title>Lista de clientes</ion-title>
+
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" text=""></ion-back-button>
+      <ion-button (click)="clickSearch()">
+        <ion-icon slot="end" name="search"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <ion-toolbar *ngIf="isSearch">
+    <ion-searchbar
+      show-cancel-button="always"
+      show-clear-button="always"
+      (ionClear)="clearSearch()"
+      (ionChange)="buscarSearch($event)"
+    ></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" color="light">
+
+  <ion-list [inset]="true">
+    <ion-item [routerLink]="['/cliente-edit/' + cliente.id]" *ngFor="let cliente of listaCliente">
+     <ion-label> {{cliente.nombreyapellido}} | {{cliente.fechanacimiento}} | {{cliente.bienasegurado}} | {{cliente.montoasegurado}} | {{cliente.cedula}} | {{cliente.direccion}} </ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+  <ion-fab  slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button [routerLink]="['/cliente-edit/new']" color="danger">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

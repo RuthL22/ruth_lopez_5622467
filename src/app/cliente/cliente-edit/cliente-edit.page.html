@@ -1,0 +1,92 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>{{ isNew ? 'Nueva' : 'Editar' }} Cliente</ion-title>
+
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/cliente-list"></ion-back-button>
+    </ion-buttons>
+
+    <ion-buttons slot="primary">
+      <ion-button *ngIf="!isNew" fill="solid" (click)="eliminarCliente()" color="danger">
+        Eliminar
+      </ion-button>
+    </ion-buttons>
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" color="light">
+  <ion-list [inset]="true">
+    <ion-item>
+      <ion-input label="ID" [(ngModel)]="id" readonly="true" disabled="true"></ion-input>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-label>Nombre y Apellido: </ion-label>
+      <ion-input required #codigoInput="ngModel" [(ngModel)]="cliente.nombreyapellido" name="nombreyapellido" type="text"></ion-input>
+    </ion-item>
+    <div class="error-message">
+      <ion-text *ngIf="nombreyapellidoInput?.invalid && nombreyapellidoInput?.touched" color="danger">
+        <p *ngIf="nombreyapellidoInput?.errors?.['required']">Este campo es obligatorio</p>
+      </ion-text>
+    </div>
+
+
+    <ion-item>
+      <ion-label>Fecha de nacimiento: </ion-label>
+      <ion-input required #fechanacimientoInput!="ngModel" type="date" [(ngModel)]="cliente.fechanacimiento"></ion-input>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-label>Bien Asegurado: </ion-label>
+      <ion-input required #nameInput="ngModel" [(ngModel)]="cliente.bienasegurado" name="bienasegurado" type="text"></ion-input>
+    </ion-item>
+      <div class="error-message">
+        <ion-text *ngIf="bienaseguradoInput?.invalid && bienaseguradoInput?.touched" color="danger">
+          <p *ngIf="bienaseguradoInput?.errors?.['required']">Este campo es obligatorio</p>
+        </ion-text>
+      </div>
+
+
+      <ion-item>
+        <ion-label>Monto Asegurado: </ion-label>
+        <ion-input required #montoaseguradoInput="ngModel" type="number" [(ngModel)]="cliente.montoasegurado"></ion-input>
+      </ion-item>
+      <div class="error-message">
+        <ion-text *ngIf="montoaseguradoInput.invalid && montoaseguradoInput.touched" color="danger">
+          <p *ngIf="montoaseguradoInput?.errors?.['required']">Este campo es obligatorio</p>
+        </ion-text>
+      </div>
+
+      <ion-item>
+        <ion-label>Cedula: </ion-label>
+        <ion-input required #cedulaInput="ngModel" type="number" [(ngModel)]="cliente.cedula"></ion-input>
+      </ion-item>
+      <div class="error-message">
+        <ion-text *ngIf="cedulaInput.invalid && cedulaInput.touched" color="danger">
+          <p *ngIf="cedulaInput?.errors?.['required']">Este campo es obligatorio</p>
+        </ion-text>
+      </div>
+
+
+
+      <ion-item>
+        <ion-label>Direccion: </ion-label>
+        <ion-input required #direccionInput="ngModel" [(ngModel)]="cliente.direccion" name="direccion" type="text"></ion-input>
+      </ion-item>
+      <div class="error-message">
+        <ion-text *ngIf="direccionInput?.invalid && direccionInput?.touched" color="danger">
+          <p *ngIf="direccionInput?.errors?.['required']">Este campo es obligatorio</p>
+        </ion-text>
+      </div>
+  </ion-list>
+
+
+ <ion-button fill="solid" (click)="guardarCliente()" color="danger" class="ion-margin-top ion-margin-bottom ion-margin-horizontal">
+  Guardar
+</ion-button>
+
+
+</ion-content>
